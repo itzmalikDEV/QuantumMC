@@ -10,7 +10,6 @@ namespace QuantumMC.Network
     {
         public static (byte[] AesKey, byte[] IvBase) DeriveKeys(byte[] sharedSecret, byte[] salt)
         {
-            // Using the natural byte order first.
             byte[] secret = (byte[])sharedSecret.Clone();
 
             using var sha256 = SHA256.Create();
@@ -29,7 +28,7 @@ namespace QuantumMC.Network
         {
             byte[] iv16 = new byte[16];
             Buffer.BlockCopy(iv, 0, iv16, 0, 12);
-            iv16[15] = 2; // GCM data blocks start at counter 2
+            iv16[15] = 2;
             
             var cipher = new SicBlockCipher(new AesEngine());
             cipher.Init(forEncryption, new ParametersWithIV(new KeyParameter(key), iv16));
@@ -66,10 +65,6 @@ namespace QuantumMC.Network
         }
     }
 
-    /// <summary>
-    /// A custom CTR stream cipher wrapper that never buffers data.
-    /// Essential for Bedrock handshake packets which are often smaller than 16 bytes.
-    /// </summary>
     public class BedrockStreamCipher
     {
         private readonly SicBlockCipher _cipher;

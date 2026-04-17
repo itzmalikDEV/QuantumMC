@@ -16,7 +16,6 @@ namespace QuantumMC.Network
         public bool CompressionReady { get; set; } = false;
         public string Username { get; set; } = string.Empty;
 
-        // Encryption State
         public bool EncryptionEnabled { get; set; } = false;
         public byte[]? AesKey { get; set; }
         public byte[]? IvBase { get; set; }

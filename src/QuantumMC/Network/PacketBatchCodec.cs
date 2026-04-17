@@ -25,8 +25,6 @@ namespace QuantumMC.Network
             if (data.Length < 1 || data[0] != GAME_PACKET_HEADER)
                 return packets;
 
-            Serilog.Log.Debug("Decode Raw Data (len={Len}): {Hex}", data.Length, BitConverter.ToString(data));
-
             var stream = new BinaryStream(data);
             stream.Position = 1;
 
@@ -42,7 +40,6 @@ namespace QuantumMC.Network
                 
                 ProcessStream(session.Decryptor, encryptedData, decrypted);
                 
-                // The last 8 bytes are the manual checksum
                 byte[] plaintext = decrypted[..^8];
                 byte[] receivedChecksum = decrypted[^8..];
                 
@@ -165,10 +162,8 @@ namespace QuantumMC.Network
             {
                 byte[] rawPayload = batchStream.GetBuffer()[1..(int)batchStream.Position]; 
                 
-                // Calculate manual checksum before encryption
                 byte[] checksum = EncryptionUtils.CalculateChecksum(rawPayload, session.SendCounter++, session.AesKey);
                 
-                // Combine plaintext + checksum
                 byte[] toEncrypt = new byte[rawPayload.Length + checksum.Length];
                 Buffer.BlockCopy(rawPayload, 0, toEncrypt, 0, rawPayload.Length);
                 Buffer.BlockCopy(checksum, 0, toEncrypt, rawPayload.Length, checksum.Length);

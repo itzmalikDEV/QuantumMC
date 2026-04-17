@@ -11,6 +11,7 @@ namespace QuantumMC.Network
         private readonly SessionManager _sessionManager;
         private readonly int _port;
         private readonly int _maxPlayers;
+        public MotdAdvertisement Advertisement { get; }
 
         public SessionManager SessionManager => _sessionManager;
 
@@ -19,6 +20,15 @@ namespace QuantumMC.Network
             _port = port;
             _maxPlayers = maxPlayers;
             _sessionManager = new SessionManager();
+            Advertisement = new MotdAdvertisement
+            {
+                Motd = "QuantumMC Server",
+                SubMotd = "QuantumMC",
+                Protocol = BedrockProtocol.Protocol.CurrentProtocol.ToString(),
+                Version = BedrockProtocol.Protocol.MinecraftVersion,
+                MaxPlayers = _maxPlayers,
+                Port = _port
+            };
 
             var endpoint = new IPEndPoint(IPAddress.Any, _port);
             _listener = new RaknetListener(endpoint);
@@ -50,7 +60,26 @@ namespace QuantumMC.Network
 
         public void UpdateMotd()
         {
-            _listener.Motd = $"MCPE;QuantumMC Server;{Protocol.CurrentProtocol};{Protocol.MinecraftVersion};{_sessionManager.OnlineCount};{_maxPlayers};{DateTimeOffset.Now.ToUnixTimeMilliseconds()};QuantumMC;Survival;1;{_port};{_port + 1};";
+            Advertisement.OnlineCount = _sessionManager.OnlineCount;
+            _listener.Motd = Advertisement.ToString();
+        }
+    }
+
+    public class MotdAdvertisement
+    {
+        public string Motd { get; set; } = "QuantumMC Server";
+        public string SubMotd { get; set; } = "QuantumMC";
+        public string Protocol { get; set; } = "944";
+        public string Version { get; set; } = "1.26.10";
+        public int OnlineCount { get; set; } = 0;
+        public int MaxPlayers { get; set; } = 20;
+        public long ServerId { get; set; } = DateTimeOffset.Now.ToUnixTimeMilliseconds();
+        public string GameMode { get; set; } = "Survival";
+        public int Port { get; set; } = 19132;
+
+        public override string ToString()
+        {
+            return $"MCPE;{Motd};{Protocol};{Version};{OnlineCount};{MaxPlayers};{ServerId};{SubMotd};{GameMode};1;{Port};{Port + 1};";
         }
     }
 }

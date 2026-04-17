@@ -103,20 +103,18 @@ namespace QuantumMC.Network.Handler
 
                     var startGame = new StartGamePacket
                     {
-                        // --- Header ---
                         EntityUniqueId = 609,
                         EntityRuntimeId = 402,
-                        PlayerGamemode = 1, // Creative
+                        PlayerGamemode = 1,
                         X = 0, Y = 0, Z = 0,
                         Yaw = 0, Pitch = 0,
 
-                        // --- Level Settings ---
                         Seed = 777777777777,
                         SpawnBiomeType = 0,
                         UserDefinedBiomeName = "plains",
                         Dimension = 0,
                         Generator = 1,
-                        WorldGamemode = 1, // Creative
+                        WorldGamemode = 1,
                         IsHardcore = false,
                         Difficulty = 0,
                         SpawnX = 100, SpawnY = 200, SpawnZ = 300,
@@ -162,7 +160,6 @@ namespace QuantumMC.Network.Handler
                         ChatRestrictionLevel = 0,
                         DisablePlayerInteractions = false,
 
-                        // --- Post-level-settings ---
                         LevelId = "",
                         WorldName = "World",
                         PremiumWorldTemplateId = "",
@@ -178,18 +175,15 @@ namespace QuantumMC.Network.Handler
                         BlockRegistryChecksum = 0,
                         WorldTemplateId = Guid.Empty,
 
-                        // Post-WorldTemplateId
                         ClientSideGenerationEnabled = false,
                         BlockNetworkIdsHashed = false,
                         IsSoundsServerAuthoritative = false,
 
-                        // Telemetry strings
                         ServerId = "",
                         ScenarioId = "",
                         WorldId = "",
                         OwnerId = "",
 
-                        // v924 ServerJoinInformation
                         HasServerJoinInformation = false,
                         ServerJoinInfo = null
                     };
