@@ -34,6 +34,7 @@ namespace QuantumMC
             Log.Information("QuantumMC — Minecraft: Bedrock Edition Server");
             Log.Information("Protocol: {Protocol} | Version: {Version}", Protocol.CurrentProtocol, Protocol.MinecraftVersion);
             Log.Information("Listening on port {Port} (Max players: {MaxPlayers})", _port, _maxPlayers);
+            Log.Information("QuantumMC is in ALPHA there are bugs so please report them.");
             Log.Information("");
             
             Registry.BlockRegistry.Init();
@@ -41,6 +42,7 @@ namespace QuantumMC
             _network.Start();
 
             Log.Information("Server started! Waiting for connections...");
+            Log.Information("Connection Open on {Port}");
 
             Console.CancelKeyPress += (_, e) =>
             {
@@ -60,6 +62,7 @@ namespace QuantumMC
             _running = false;
 
             Log.Information("Stopping server...");
+            Log.Information("Server Stopped Successfully!");
 
             _network.Stop();
 
