@@ -17,7 +17,7 @@
 
 QuantumMC aims to be the modern C# pioneer for Bedrock server software. 
 
-By leveraging the cutting-edge performance enhancements of **.NET 9**, QuantumMC moves entirely away from archaic procedural code into a beautifully scalable, highly-concurrent Object-Oriented framework.
+By leveraging the cutting-edge performance enhancements of **.NET 9**, QuantumMC moves entirely away from archaic procedural code into a beautifully scalable, highly-concurrent (OOP) Object-Oriented framework.
 
 ---
 
