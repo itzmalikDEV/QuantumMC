@@ -25,7 +25,7 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: 9.0.x
+        dotnet-version: 10.0.x
 
     - name: Configure Git
       run: |
@@ -94,9 +94,9 @@ jobs:
           
           ### 🛠️ Installation
           1. Download the `QuantumMC.dll` or executable from the assets below.
-          2. Ensure you have the [.NET 9 Runtime](https://dotnet.microsoft.com/download/dotnet/9.0) installed.
+          2. Ensure you have the [.NET 10 Runtime](https://dotnet.microsoft.com/download/dotnet/10.0) installed.
           3. Run using `dotnet QuantumMC.dll` or the provided binary.
           
-        files: src/QuantumMC/bin/Release/net9.0/QuantumMC.dll
+        files: src/QuantumMC/bin/Release/net10.0/QuantumMC.dll
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
