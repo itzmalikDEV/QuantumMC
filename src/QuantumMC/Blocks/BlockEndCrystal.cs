@@ -5,6 +5,6 @@ namespace QuantumMC.Blocks
         public static int ID { get; internal set; }
         public override int RuntimeId => ID;
 
-        public BlockDirt() : base("minecraft:end_crystal") { }
+        public BlockEndCrystal() : base("minecraft:end_crystal") { }
     }
 }

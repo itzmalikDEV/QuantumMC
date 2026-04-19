@@ -15,5 +15,7 @@ namespace QuantumMC.Config
 
         public string WorldName { get; set; } = "world";
         public string WorldGenerator { get; set; } = "flat";
+
+        // Add more Options later on this should also have Quantum support or a support for custom PROXY
     }
 }

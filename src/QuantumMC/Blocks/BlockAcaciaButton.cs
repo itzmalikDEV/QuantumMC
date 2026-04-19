@@ -5,6 +5,6 @@ namespace QuantumMC.Blocks
         public static int ID { get; internal set; }
         public override int RuntimeId => ID;
 
-        public BlockAir() : base("minecraft:acacia_button") { }
+        public BlockAcaciaButton() : base("minecraft:acacia_button") { }
     }
 }
