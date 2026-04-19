@@ -16,24 +16,24 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: 9.0.x
+        dotnet-version: 10.0.x
 
     - name: Build
       run: dotnet build src/QuantumMC/QuantumMC.csproj --configuration Release
 
     - name: Delete old nightly release and tag
       run: |
-        gh release delete nightly --cleanup-tag -y || true
-        git push origin :refs/tags/nightly || true
+        gh release delete nightly_build --cleanup-tag -y || true
+        git push origin :refs/tags/nightly_build || true
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Create nightly release
       run: |
-        gh release create nightly \
+        gh release create nightly_build \
           --title "Nightly Build" \
           --prerelease \
           --latest=false \
-          src/QuantumMC/bin/Release/net9.0/QuantumMC.dll
+          src/QuantumMC/bin/Release/net10.0/QuantumMC.dll
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
