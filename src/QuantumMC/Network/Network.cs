@@ -3,6 +3,7 @@ using BedrockProtocol;
 using RaknetCS.Network;
 using Serilog;
 using QuantumMC.World;
+using QuantumMC.Config;
 
 namespace QuantumMC.Network
 {
@@ -17,16 +18,16 @@ namespace QuantumMC.Network
         public SessionManager SessionManager => _sessionManager;
         public World.World World { get; }
 
-        public Network(int port, int maxPlayers)
+        public Network(ServerConfig config)
         {
-            _port = port;
-            _maxPlayers = maxPlayers;
+            _port = config.Port;
+            _maxPlayers = config.MaxPlayers;
             _sessionManager = new SessionManager();
             World = new World.World(new FlatWorldGenerator());
             Advertisement = new MotdAdvertisement
             {
-                Motd = "A QuantumMC Server",
-                SubMotd = "QuantumMC",
+                Motd = config.Motd,
+                SubMotd = config.SubMotd,
                 Protocol = BedrockProtocol.Protocol.CurrentProtocol.ToString(),
                 Version = BedrockProtocol.Protocol.MinecraftVersion,
                 MaxPlayers = _maxPlayers,

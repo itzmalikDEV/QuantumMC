@@ -26,7 +26,6 @@ namespace QuantumMC.World
         public World(IWorldGenerator generator)
         {
             _generator = generator;
-            Log.Information("World initialized with generator: {Generator}", generator.GetType().Name);
         }
 
         /// <summary>

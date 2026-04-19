@@ -5,11 +5,10 @@ namespace QuantumMC.Config
 {
     public static class ConfigManager
     {
-        private const string ConfigPath = "Config.yml";
+        private static string ConfigPath => Path.Combine(QuantumMC.DataFolder, "config.yml");
 
         public static ServerConfig Load()
         {
-            // Generate default config if it doesn't exist
             if (!File.Exists(ConfigPath))
             {
                 var defaults = new ServerConfig();

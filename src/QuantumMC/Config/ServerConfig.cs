@@ -2,16 +2,17 @@ namespace QuantumMC.Config
 {
     public class ServerConfig
     {
-        // Network
+        public string BindAddress { get; set; } = "0.0.0.0";
         public int Port { get; set; } = 19132;
         public int MaxPlayers { get; set; } = 20;
 
-        // MOTD
-        public string Motd { get; set; } = "A QuantumMC Server";
-        public string SubMotd { get; set; } = "QuantumMC";
-        public string GameMode { get; set; } = "Survival";
+        public bool DebugMode { get; set; } = false;
 
-        // World
+        public string Motd { get; set; } = "QuantumMC Server";
+        public string SubMotd { get; set; } = "Powered by QuantumMC";
+        public int GameMode { get; set; } = 0;
+        public bool XboxAuth { get; set; } = true;
+
         public string WorldName { get; set; } = "world";
         public string WorldGenerator { get; set; } = "flat";
     }

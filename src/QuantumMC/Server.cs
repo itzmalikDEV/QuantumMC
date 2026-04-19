@@ -9,23 +9,24 @@ namespace QuantumMC
 {
     public class Server
     {
+        public static Server Instance { get; private set; } = default!;
+        
         private readonly Network.Network _network;
         private readonly int _port;
         private readonly int _maxPlayers;
         private bool _running;
+        private ServerConfig _config;
 
-        public Server()
+        public Server(ServerConfig config)
         {
-            var config = ConfigManager.Load();
+            Instance = this;
 
+            _config = config;
             _port = config.Port;
             _maxPlayers = config.MaxPlayers;
 
-            _network = new Network.Network(_port, _maxPlayers);
+            _network = new Network.Network(config);
 
-            _network.Advertisement.Motd = config.Motd;
-            _network.Advertisement.SubMotd = config.SubMotd;
-            _network.Advertisement.GameMode = config.GameMode;
         }
 
         public void Start()
@@ -41,13 +42,11 @@ namespace QuantumMC
             Log.Information("QuantumMC — Minecraft: Bedrock Edition Server");
             Log.Information("Protocol: {Protocol} | Version: {Version}", Protocol.CurrentProtocol, Protocol.MinecraftVersion);
             Log.Information("Listening on port {Port} (Max players: {MaxPlayers})", _port, _maxPlayers);
-            Log.Information("QuantumMC is in ALPHA there are bugs so please report them.");
             Log.Information("");
 
             Registry.BlockRegistry.Init();
             _network.Start();
             Log.Information("Server started! Waiting for connections...");
-            Log.Information("Connection Open on {Port}", _port); // also fixed missing arg here
 
             Console.CancelKeyPress += (_, e) =>
             {
